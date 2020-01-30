@@ -5,7 +5,7 @@ import copy
 # initialize Freebase Dataset
 #fb = KnowledgeGraph.factory('Fb15k')
 #fb = KnowledgeGraph.factory('Fb15k-237')
-#fb = KnowledgeGraph.factory('Wn18')
+fb = KnowledgeGraph.factory('Wn18')
 #fb = KnowledgeGraph.factory('Wn18RR')
 #fb = KnowledgeGraph.factory('YAGO3-10')
 
@@ -24,14 +24,14 @@ transE_experiment.train()
 
 
 
-# transE_experiment.num_of_epochs = 1
-# transE_experiment.validation_freq = 1
-# unfiltered_exp = copy.deepcopy(filtered_exp)
+ transE_experiment.num_of_epochs = 1000
+ transE_experiment.validation_freq = 1000
+ unfiltered_exp = copy.deepcopy(filtered_exp)
 
 # Either train or load pretrained experiment objects
 ## TRAIN
-# filtered_exp.train(filtered_corrupted_batch=True)
-# unfiltered_exp.train(filtered_corrupted_batch=False)
+filtered_exp.train(filtered_corrupted_batch=True)
+unfiltered_exp.train(filtered_corrupted_batch=False)
 
 
 ## LOAD PRETRAINED
@@ -39,17 +39,17 @@ transE_experiment.train()
 # unfiltered_exp.load_model_params('unfiltered_learned_params')
 
 # Evaluation
-# validation_link_prediction_dataset = transE_experiment.knowledge_graph.valid_dataset
-# validation_filter_datasets = [transE_experiment.knowledge_graph.train_dataset]
-# filtered_validation_mean_rank, filtered_validation_hits10 = transE_experiment.get_mean_rank(
-#     validation_link_prediction_dataset,
-#     [validation_filter_datasets], filtered=True, fast_testing=False)
-#
-# test_link_prediction_dataset = transE_experiment.knowledge_graph.test_dataset
-# test_filter_datasets = [transE_experiment.knowledge_graph.train_dataset,
-#                         transE_experiment.knowledge_graph.valid_dataset]
-# filtered_test_mean_rank, filtered_test_hits10 = transE_experiment.get_mean_rank(test_link_prediction_dataset,
-#                                                                                 test_filter_datasets, filtered=True,
-#                                                                                 fast_testing=False)
+validation_link_prediction_dataset = transE_experiment.knowledge_graph.valid_dataset
+validation_filter_datasets = [transE_experiment.knowledge_graph.train_dataset]
+filtered_validation_mean_rank, filtered_validation_hits10 = transE_experiment.get_mean_rank(
+     validation_link_prediction_dataset,
+     [validation_filter_datasets], filtered=True, fast_testing=False)
 
-# unfiltered_exp.get_test_mean_rank(filtered=False, fast_testing=False)
+test_link_prediction_dataset = transE_experiment.knowledge_graph.test_dataset
+test_filter_datasets = [transE_experiment.knowledge_graph.train_dataset,
+                         transE_experiment.knowledge_graph.valid_dataset]
+filtered_test_mean_rank, filtered_test_hits10 = transE_experiment.get_mean_rank(test_link_prediction_dataset,
+                                                                                 test_filter_datasets, filtered=True,
+                                                                                 fast_testing=False)
+
+unfiltered_exp.get_test_mean_rank(filtered=False, fast_testing=False)
