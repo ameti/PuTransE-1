@@ -8,7 +8,7 @@ import copy
 fb = KnowledgeGraph.factory('Wn18')
 #fb = KnowledgeGraph.factory('Wn18RR')
 #fb = KnowledgeGraph.factory('YAGO3-10')
-
+print('S0.0tart trainiiiiiiiiiiiiiiiiiiiiiiiiiii')
 
 num_of_epochs = 1000
 validation_freq = 1000

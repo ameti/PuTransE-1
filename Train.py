@@ -41,6 +41,7 @@ class Experiment:
         self.best_mean_rank_relation_embeddings = None
 
     def train(self, filtered_corrupted_batch=False):
+        print('Start trainiiiiiiiiiiiiiiiiiiiiiiiiiii')
         hyper_param_path = initialize_log_folder(self.knowledge_graph.data_dir)
         self.save_model_params(hyper_param_path)
         hyperparam_config_log = open(hyper_param_path / 'hyperparam_config.txt', 'w')
